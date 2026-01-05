@@ -1,8 +1,16 @@
 node_modules
 dist
+dist-lib
 .next
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Excalidraw assets (copied from node_modules)
+public/excalidraw-assets
+public/excalidraw-assets-dev
+
+# Build artifacts
+*.tsbuildinfo

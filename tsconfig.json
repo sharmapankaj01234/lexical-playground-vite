@@ -5,23 +5,21 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
-    "noEmit": true,
+    "noEmit": false,
+    "declaration": true,
+    "declarationMap": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "outDir": "./dist-lib",
     "paths": {
       "@/src/*": ["./src/*"]
     }
   },
-  // "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next.config.mjs"],
-  "exclude": ["node_modules"]
+  "include": ["src/**/*", "src/types/**/*"],
+  "exclude": ["node_modules", "dist", "dist-lib", "**/*.spec.ts", "**/*.test.ts"]
 }

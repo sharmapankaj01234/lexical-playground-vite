@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,11 +14,15 @@ export default defineConfig({
   define: {
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
     'process.env.IS_PREACT': JSON.stringify('false'),
-    'process.env.EXCALIDRAW_ASSET_PATH': JSON.stringify('https://unpkg.com/@excalidraw/excalidraw@0.17.0/dist/'),
+    'process.env.EXCALIDRAW_ASSET_PATH': JSON.stringify('/'),
   },
   server: {
     port: 3000,
     open: true,
+    fs: {
+      // Allow serving files from node_modules
+      allow: ['..'],
+    },
   },
   build: {
     outDir: 'dist',
@@ -25,6 +30,14 @@ export default defineConfig({
     commonjsOptions: {
       include: [/node_modules/],
       transformMixedEsModules: true,
+    },
+    rollupOptions: {
+      output: {
+        // Ensure Excalidraw assets are properly handled
+        manualChunks: {
+          excalidraw: ['@excalidraw/excalidraw'],
+        },
+      },
     },
   },
   optimizeDeps: {
@@ -35,5 +48,6 @@ export default defineConfig({
       },
     },
   },
+  publicDir: 'public',
 });
 

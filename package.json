@@ -1,33 +1,61 @@
 {
   "name": "lexical-playground",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "A feature-rich Lexical editor playground with React",
+  "type": "module",
+  "main": "./dist-lib/lexical-playground.cjs",
+  "module": "./dist-lib/lexical-playground.mjs",
+  "types": "./dist-lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist-lib/index.d.ts",
+      "import": "./dist-lib/lexical-playground.mjs",
+      "require": "./dist-lib/lexical-playground.cjs"
+    },
+    "./styles": "./dist-lib/lexical-playground.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist-lib",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:lib": "vite build --config vite.config.lib.ts && npm run build:types",
+    "build:types": "tsc --emitDeclarationOnly --declaration --declarationMap --outDir dist-lib --skipLibCheck || true",
     "preview": "vite preview",
+    "prepublishOnly": "npm run build:lib",
+    "postinstall": "npm run copy-excalidraw-assets",
+    "copy-excalidraw-assets": "mkdir -p public && cp -r node_modules/@excalidraw/excalidraw/dist/excalidraw-assets* public/ || true",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "lexical",
+    "editor",
+    "rich-text",
+    "wysiwyg",
+    "react",
+    "playground"
+  ],
   "author": "",
-  "license": "ISC",
-  "description": "",
+  "license": "MIT",
   "dependencies": {
     "@lexical/headless": "^0.25.0",
-    "@next/bundle-analyzer": "^15.1.7",
-    "next": "14.1.4",
+    "@vitejs/plugin-react": "^5.1.2",
     "prettier": "^3.5.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "vite": "^7.3.0",
     "y-websocket": "^2.1.0"
   },
   "peerDependencies": {
+    "lexical": "0.25.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "lexical": "0.25.0",
     "y-websocket": "^2.1.0",
     "yjs": ">=13.5.42"
-
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
