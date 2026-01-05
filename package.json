@@ -1,5 +1,5 @@
 {
-  "name": "lexical-playground",
+  "name": "lexical-playground-vite",
   "version": "1.0.0",
   "description": "A feature-rich Lexical editor playground with React",
   "type": "module",
